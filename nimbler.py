@@ -406,9 +406,9 @@ class NimblerWindow(Gtk.Window):
             self.get_window().focus(time)
         else:
             self.hidden = True
-            self.frame.remove(self.table)
             self.table.destroy()
             self.get_window().hide()
+            self.get_window().resize(1,1)
 
     def hotkey(self, key, data):
         self.toggle()
