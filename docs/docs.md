@@ -1,10 +1,10 @@
-# Fuzzy Windows Documentation
+# Nimbler Documentation
 
-Fuzzy Windows is a window switcher for GTK. It can be activated via a hotkey, upon which it shows you a list of open windows. You can find your relevant window quickly using *fuzzy searching*, similar to what you find in Sublime Text 2.
+Nimbler is a window switcher for GTK. It can be activated with a hotkey, upon which it shows you a list of open windows ordered by workspace. You can switch quickly to the desired window using the shortcut displayed in front of the window. Workspaces can be activated using `F1` through `F12`. The list of windows also allows clicking and navigation with the arrow keys.
 
 ![Fuzzy Windows](images/fw.png)
 
-To quit Fuzzy Windows, hit `Alt+F4`.
+To quit Nimbler, hit `Alt+F4`.
 
 ## Feature Enhancements & Bugs
 
@@ -13,15 +13,15 @@ If you have a suggestion or have found a bug, please use GitHub's issue tracker 
 
 ## Installation
 
-Fuzzy Windows has been tested on Ubuntu. However, it should work under any GTK based environment.
+Nimbler has been tested on Debian and Ubuntu. However, it should work under any GTK based environment.
 
 ### Requirements
 
-Fuzzy Windows depends on GTK3+ and KeyBinder 3. You will need to install KeyBinder 3 via your operating system's package manager.
+Nimbler depends on GTK3+ and KeyBinder 3. You will need to install KeyBinder 3 via your operating system's package manager.
 
 In case of Ubuntu, you can open the *Software Center* and search for `keybinder 3`, and then install it. (*Make sure you click on **show technical items** in the Software Center*)
 
-If you're using Debian, you'll find some OS specific instructions at the bottom of this page.
+If you're using Debian Jessie, you can similarly install libkeybinder. For Wheezy the package will have to be backported from Jessie or Ubuntu. More detailed instructions can be found below.
 
 ### Installing
 
@@ -65,22 +65,12 @@ sudo dpkg -i *.deb
 
 *- Thanks to [Frenzie](https://github.com/Frenzie) for these instructions*
 
-#### Arch Linux
-
-Fuzzy Windows can be found in the [AUR](https://aur.archlinux.org/packages/fuzzy-window-switcher-git/)
-
-
 
 ## Configuration
 
-Fuzzy Windows can be configured by creating a config file. The config file can be present in the following locations:
+Nimbler can be configured by creating a configuraton file in `~/.config/nimbler.conf`.
 
-1. ~/.config/fuzzy-windows.conf
-1. ~/.config/.fuzzy-windows
-1. ~/fuzzy-windows.conf
-1. ~/.fuzzy-windows
-
-The config file, if present, should at least contain the following boilerplate.
+The configuration file, if present, should at least contain the following boilerplate.
 
 ```
 [DEFAULT]
@@ -139,7 +129,7 @@ always_show_windows=
 
 ### 4. Show/Hide Specific Window Types
 
-By default, Fuzzy Windows will show all types of windows. You can choose to ignore an entire type of window, like Dock, if you wish. Here's how you'd do it for all types of windows:
+By default, Nimbler will show only normal windows. You can choose to ignore or display an entire type of window, like Dock, if you wish. Here's how you'd ignore all types of windows:
 
 ```
 show_windows_normal=0
@@ -154,3 +144,16 @@ show_windows_splashscreen=0
 
 If a window matches any regex of the `always_show_windows` option, then it will be shown regardless of whether the actual window type is ignored.
 
+### 5. Icon Type
+
+Normally Nimbler will use fairly large icons, which allows for quick identification of applications before switching attention to the window title. However, if you have a small screen, an awful lot of windows, or simply don't like larger icons you may opt for smaller icons. The available options are `default` (32x32px), `mini` (16x16px), and `custom`.
+
+```
+icon_type=mini
+```
+
+The `custom` setting requires an additional `icon_size` option.
+
+```
+icon_size=64
+```
