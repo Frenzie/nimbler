@@ -1,6 +1,6 @@
-# Fuzzy Window Switcher
+# Nimbler
 
-A fuzzy window switcher for Ubuntu (GTK based, so should work in other distros too, but I haven't tested). It shows you a list of open windows and uses a very simple regex based algorithm to sort them according to your input. Pressing enter opens the window at the very top.
+Nimbler is a GTK-based window switcher. It can be activated with a hotkey, upon which it shows you a list of open windows ordered by workspace. You can switch quickly to the desired window using the shortcut displayed in front of the window. Workspaces can be activated using `F1` through `F12`. The list of windows also allows clicking and navigation with the arrow keys.
 
 ![Fuzzy Windows](docs/images/fw.png)
 

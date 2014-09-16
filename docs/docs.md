@@ -1,6 +1,6 @@
 # Nimbler Documentation
 
-Nimbler is a window switcher for GTK. It can be activated with a hotkey, upon which it shows you a list of open windows ordered by workspace. You can switch quickly to the desired window using the shortcut displayed in front of the window. Workspaces can be activated using `F1` through `F12`. The list of windows also allows clicking and navigation with the arrow keys.
+Nimbler is a GTK-based window switcher. It can be activated with a hotkey, upon which it shows you a list of open windows ordered by workspace. You can switch quickly to the desired window using the shortcut displayed in front of the window. Workspaces can be activated using `F1` through `F12`. The list of windows also allows clicking and navigation with the arrow keys.
 
 ![Fuzzy Windows](images/fw.png)
 
