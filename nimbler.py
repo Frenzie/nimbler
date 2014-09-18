@@ -68,7 +68,7 @@ class KeyBindings():
 
 class WindowList():
 
-    def __init__(self, ignored_windows, always_show_windows, ignored_window_types, icon_type):
+    def __init__(self, ignored_windows, always_show_windows, ignored_window_types, icon_size):
         self.windowList = []
         self.max_windows = 0
         self.previousWindow = None
@@ -76,7 +76,7 @@ class WindowList():
         self.ignored_windows = ignored_windows
         self.always_show_windows = always_show_windows
         self.ignored_window_types = ignored_window_types
-        self.icon_type = icon_type
+        self.icon_size = icon_size
 
     def refresh(self):
         # Clear existing
@@ -146,9 +146,9 @@ class WindowList():
         self.window_list_merged = [item for sublist in self.windowList for item in sublist]
 
     def get_icon(self, window):
-        if self.icon_type == 'default':
+        if self.icon_size == 'default' or type(self.icon_size) is int:
             return window.get_icon()
-        elif self.icon_type == 'mini':
+        elif self.icon_size == 'mini':
             return window.get_mini_icon()
     
     def getLatest(self):
@@ -215,7 +215,7 @@ class NimblerWindow(Gtk.Window):
             config.ignored_windows,
             config.always_show_windows,
             config.ignored_window_types,
-            config.icon_type
+            config.icon_size
         )
         # Needed for number of windows as well as making sure it's ready before drawing
         self.windowList.getLatest()
@@ -445,7 +445,7 @@ class Config:
         self.width = int(self.getOption('width', 700))
         self.height = int(self.getOption('height', 200))
         self.ignored_window_types = self.getIgnoredWindowTypes()
-        self.icon_type = self.getOption('icon_type', 'default')
+        self.icon_size = self.get_icon_size(self.getOption('icon_size', 'default'))
 
     def getOption(self, option_name, default_value):
         if self.config.has_option('DEFAULT', option_name):
@@ -490,6 +490,14 @@ class Config:
                 ignored_window_types.append(window_types[window_type]['window_type'])
 
         return ignored_window_types
+        
+    def get_icon_size(self, icon_size):
+        if icon_size == 'default' or icon_size == 'mini':
+            return icon_size
+        elif icon_size.isdigit():
+            icon_size = int(icon_size)
+            Wnck.set_default_icon_size(icon_size)
+            return 'default'
 
 # Catch SIGINT signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
