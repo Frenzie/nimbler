@@ -146,15 +146,15 @@ show_windows_splashscreen=0
 
 If a window matches any regex of the `always_show_windows` option, then it will be shown regardless of whether the actual window type is ignored.
 
-### 5. Icon Type
+### 5. Icon Size
 
-Normally Nimbler will use fairly large icons, which allows for quick identification of applications before switching attention to the window title. However, if you have a small screen, an awful lot of windows, or simply don't like larger icons you may opt for smaller icons. The available options are `default` (32x32px), `mini` (16x16px), and `custom`.
+Normally Nimbler will use fairly large icons, which allows for quick identification of applications before switching attention to the window title. However, if you have a small screen, an awful lot of windows or simply don't like larger icons, you may opt for smaller icons. The available `icon_size` options are `default` (32x32px), `mini` (16x16px), and a custom size in pixels.
 
 ```
-icon_type=mini
+icon_size=mini
 ```
 
-The `custom` setting requires an additional `icon_size` option.
+You can enter a number specifying the size in pixels if you want the icons to show up at a different size than the provided defaults.
 
 ```
 icon_size=64
