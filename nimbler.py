@@ -205,6 +205,25 @@ class NimblerWindow(Gtk.Window):
         # Window is initially hidden
         self.hidden = True
         
+        # Set up keybindings
+        self.keybindings = KeyBindings()
+        self.numbering = self.keybindings.numbering
+        self.numbering_keyvals = self.keybindings.get_keyvals_from_unicode()
+        self.function_keys_keyvals = self.keybindings.get_keyvals_from_name()
+        # Set up keypad numbers dictionary
+        self.keypad_numbers = {
+            Gdk.KEY_KP_0: Gdk.KEY_0,
+            Gdk.KEY_KP_1: Gdk.KEY_1,
+            Gdk.KEY_KP_2: Gdk.KEY_2,
+            Gdk.KEY_KP_3: Gdk.KEY_3,
+            Gdk.KEY_KP_4: Gdk.KEY_4,
+            Gdk.KEY_KP_5: Gdk.KEY_5,
+            Gdk.KEY_KP_6: Gdk.KEY_6,
+            Gdk.KEY_KP_7: Gdk.KEY_7,
+            Gdk.KEY_KP_8: Gdk.KEY_8,
+            Gdk.KEY_KP_9: Gdk.KEY_9,
+        }
+        
         # Set up the frame
         self.frame = Gtk.Frame()
         self.frame.set_shadow_type(1)
@@ -226,10 +245,6 @@ class NimblerWindow(Gtk.Window):
     def populate(self, items):
         self.window_list = self.windowList.windowList
         self.window_counter = 0
-        self.keybindings = KeyBindings()
-        self.numbering = self.keybindings.numbering
-        self.numbering_keyvals = self.keybindings.get_keyvals_from_unicode()
-        self.function_keys_keyvals = self.keybindings.get_keyvals_from_name()
         self.num_workspaces = len(self.window_list)
         
         for i in range(0, self.num_workspaces):
@@ -343,6 +358,12 @@ class NimblerWindow(Gtk.Window):
             self.presentWindow(windows[index]['window'])
 
     def keypress(self, widget, event):
+        # Support pressing numbers on keypad
+        # If event.keyval is found in the dictionary of keypad numbers it'll change it into a regular number;
+        # otherwise it simply returns event.keyval
+        # Thanks to http://stackoverflow.com/a/103081
+        event.keyval = self.keypad_numbers.get(event.keyval, event.keyval)
+        
         #selected = self.appListView.get_selection().get_selected()
         if event.keyval == Gdk.KEY_Escape:
             self.toggle()
