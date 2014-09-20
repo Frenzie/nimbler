@@ -2,7 +2,7 @@
 
 Nimbler is a GTK-based window switcher. It can be activated with a hotkey, upon which it shows you a list of open windows ordered by workspace. You can switch quickly to the desired window using the shortcut displayed in front of the window. Workspaces can be activated using `F1` through `F12`. The list of windows also allows clicking and navigation with the arrow keys.
 
-The program was forked from [Fuzzy Window Switcher](https://github.com/XCMer/fuzzy-window-switcher), which attempts to solve the same problem from a slightly different perspective. Instead of offering a static list, it only displays programs that match what you type.
+The program was forked from [Fuzzy Window Switcher](https://github.com/XCMer/fuzzy-window-switcher), which attempts to solve the same problem from a slightly different perspective. Instead of offering a static list, Fuzzy Windows Switcher only displays programs that match what you type.
 
 ![Fuzzy Windows](images/fw.png)
 
@@ -15,7 +15,7 @@ If you have a suggestion or have found a bug, please use GitHub's issue tracker 
 
 ## Installation
 
-Nimbler has been tested on Debian and Ubuntu. However, it should work under any GTK based environment.
+Nimbler has been tested on Debian and Ubuntu. However, it should work under any GTK-based environment.
 
 ### Requirements
 
@@ -29,7 +29,7 @@ If you're using Debian Jessie, you can similarly install libkeybinder. For Wheez
 
 For the actual installation procedure, check out this well-written blog post by [Andrew](https://github.com/hotice): [http://www.webupd8.org/2013/07/fuzzy-window-switcher-for-ubuntu.html](http://www.webupd8.org/2013/07/fuzzy-window-switcher-for-ubuntu.html)
 
-I'll come up with an official set of instructions soon. Till then, the above blog post should server as an excellent reference.
+I'll come up with an official set of instructions soon. Till then, the above blog post should serve as an excellent reference.
 
 
 ### Distro-Specific Instructions
