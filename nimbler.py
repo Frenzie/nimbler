@@ -272,6 +272,7 @@ class NimblerWindow(Gtk.Window):
                 
                 # Shows what key to press
                 binding_label = Gtk.Label()
+                binding_label.set_padding(5, 0)
                 if self.window_counter < len(self.numbering):
                     binding_label.set_markup('<b>' + escape(binding) + '</b>')
                 self.table.attach(binding_label, i_column_left, i_binding_right, j4table_left, j4table_right)
