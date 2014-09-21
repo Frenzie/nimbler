@@ -4,7 +4,7 @@ Nimbler is a GTK-based window switcher. It can be activated with a hotkey, upon 
 
 The program was forked from [Fuzzy Window Switcher](https://github.com/XCMer/fuzzy-window-switcher), which attempts to solve the same problem from a slightly different perspective. Instead of offering a static list, Fuzzy Windows Switcher only displays programs that match what you type.
 
-![Fuzzy Windows](images/fw.png)
+![Nimbler](images/screenshot-nimbler-20140921-fs8.png)
 
 To quit Nimbler, hit `Alt+F4`.
 
