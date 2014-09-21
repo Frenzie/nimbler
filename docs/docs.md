@@ -159,3 +159,14 @@ You can enter a number specifying the size in pixels if you want the icons to sh
 ```
 icon_size=64
 ```
+
+## Similar Software
+If you're reading this, you're probably interested in other alternatives to the default application switchers. In no particular order, here are a few that might be of interest:
+
+* [fuzzy-window-switcher](https://github.com/XCMer/fuzzy-window-switcher) is Nimbler's parent and it does what the name implies.
+* [superswitcher](http://code.google.com/p/superswitcher/) is quite nice. However, it has been [discontinued](http://blogs.gnome.org/nigeltao/2013/01/28/so-long-and-thanks-for-the-super-switching/).
+	* Because it hasn't been updated in a while, at least two minor forks exist: [smartswitcher](https://github.com/Frenzie/smartswitcher) and [switchy](https://github.com/cmpitg/switchy).
+* [simpleswitcher](https://github.com/seanpringle/simpleswitcher) is a superswitcher fork that is far more similar to fuzzy-window-switcher than to superswitcher, except its matching is not fuzzy.
+* [Rofi](https://davedavenport.github.io/rofi/) is a simpleswitcher fork that adds fuzzy matching, making it even more similar in nature to fuzzy-window-switcher. It also adds some extra features.
+
+Spiritually, the main concept behind Nimbler itself is based on the Windows program [SmartTab.org](http://smarttab.org/).
