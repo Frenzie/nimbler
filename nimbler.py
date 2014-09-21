@@ -494,20 +494,20 @@ class Config:
 
     def getIgnoredWindowTypes(self):
         window_types = {
-            'normal': {'window_type': Wnck.WindowType.NORMAL},
-            'desktop': {'window_type': Wnck.WindowType.DESKTOP},
-            'dock': {'window_type': Wnck.WindowType.DOCK},
-            'dialog': {'window_type': Wnck.WindowType.DIALOG},
-            'toolbar': {'window_type': Wnck.WindowType.TOOLBAR},
-            'menu': {'window_type': Wnck.WindowType.MENU},
-            'utility': {'window_type': Wnck.WindowType.UTILITY},
-            'splashscreen': {'window_type': Wnck.WindowType.SPLASHSCREEN},
+            'normal': {'window_type': Wnck.WindowType.NORMAL, 'default': True},
+            'desktop': {'window_type': Wnck.WindowType.DESKTOP, 'default': False},
+            'dock': {'window_type': Wnck.WindowType.DOCK, 'default': False},
+            'dialog': {'window_type': Wnck.WindowType.DIALOG, 'default': False},
+            'toolbar': {'window_type': Wnck.WindowType.TOOLBAR, 'default': False},
+            'menu': {'window_type': Wnck.WindowType.MENU, 'default': False},
+            'utility': {'window_type': Wnck.WindowType.UTILITY, 'default': False},
+            'splashscreen': {'window_type': Wnck.WindowType.SPLASHSCREEN, 'default': False},
         }
 
-        ignored_window_types = ['desktop', 'dock', 'dialog', 'toolbar', 'menu', 'utility', 'splashscreen']
+        ignored_window_types = []
 
         for window_type in window_types:
-            should_show = bool(int(self.getOption('show_windows_' + window_type, True)))
+            should_show = bool(int(self.getOption('show_windows_' + window_type, window_types[window_type]['default'])))
             if not should_show:
                 ignored_window_types.append(window_types[window_type]['window_type'])
 
