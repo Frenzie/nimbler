@@ -449,9 +449,8 @@ class Config:
         self.config = configparser.ConfigParser()
         self.config.read([
             os.path.expanduser('~/.config/nimbler.conf'),
-#             os.path.expanduser('~/.config/.fuzzy-windows'),
-#             os.path.expanduser('~/fuzzy-windows.conf'),
-#             os.path.expanduser('~/.fuzzy-windows')
+            os.path.expanduser('~/nimbler.conf'),
+            os.path.expanduser('~/.nimbler.conf')
         ])
 
         self.loadOptions()
