@@ -324,6 +324,15 @@ class NimblerWindow(Gtk.Window):
             self.windowList.rank(text)
             self.populate(self.windowList.get())
 
+    def close_window(self, window):
+        window.close(self.getXTime())
+
+    def close_window_via_number(self, window_number):
+        self.toggle()
+        self.close_window(
+            self.windowList.window_list_merged[window_number]['window']
+        )
+
     def presentWindow(self, window):
         workspace = window.get_workspace()
         if workspace is not None:
@@ -376,7 +385,10 @@ class NimblerWindow(Gtk.Window):
         elif not self.enteredName.has_focus():
             # Window shortcuts
             if event.keyval in self.numbering_keyvals[:self.window_counter]:
-                self.present_window_via_number(self.numbering_keyvals.index(event.keyval))
+                if event.get_state() & Gdk.ModifierType.CONTROL_MASK:
+                    self.close_window_via_number(self.numbering_keyvals.index(event.keyval))
+                else:
+                    self.present_window_via_number(self.numbering_keyvals.index(event.keyval))
             elif event.keyval == Gdk.KEY_colon:
                 # Show input, thanks to http://stackoverflow.com/a/4956770
                 self.enteredName.show()
@@ -463,8 +475,6 @@ class Config:
         self.always_show_windows = self.prepareAlwaysShowWindows(
             self.getOption('always_show_windows', [])
         )
-        self.width = int(self.getOption('width', 700))
-        self.height = int(self.getOption('height', 200))
         self.ignored_window_types = self.getIgnoredWindowTypes()
         self.icon_size = self.get_icon_size(self.getOption('icon_size', 'default'))
 
