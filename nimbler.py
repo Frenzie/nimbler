@@ -66,6 +66,15 @@ class KeyBindings():
 
         return self.keyvals_from_name
 
+class DPIScaling():
+
+    def __init__(self):
+        # Get the screen dpi
+        self.dpi = Gdk.Screen.get_resolution(Gdk.Screen.get_default())
+        # This is a scale factor between points specified in a Pango.FontDescription and cairo units. The default value is 96, meaning that a 10 point font will be 13 units high. (10 * 96. / 72. = 13.3).
+        # See http://lazka.github.io/pgi-docs/#Gdk-3.0/classes/Screen.html#Gdk.Screen.set_resolution
+        self.scaling_factor = self.dpi / 96
+
 class WindowList():
 
     def __init__(self, ignored_windows, always_show_windows, ignored_window_types, icon_size):
@@ -246,6 +255,8 @@ class NimblerWindow(Gtk.Window):
         self.window_list = self.windowList.windowList
         self.window_counter = 0
         self.num_workspaces = len(self.window_list)
+
+        dpi_scaling_factor = DPIScaling().scaling_factor
         
         for i in range(0, self.num_workspaces):
         #for i in range(0, self.workspaces):
@@ -295,7 +306,7 @@ class NimblerWindow(Gtk.Window):
                 # The all important window button
                 button = Gtk.Button()
                 button.set_relief(Gtk.ReliefStyle.NONE)
-                button.set_size_request(256, -1)
+                button.set_size_request((dpi_scaling_factor * 256), -1)
                 button.set_name(binding)
                 button.connect('clicked', self.present_window_via_button)
                 
