@@ -183,7 +183,8 @@ class WindowList():
         self.fuzzyMatcher.setPattern(text.lower())
         for i in self.window_list_merged:
             score = self.fuzzyMatcher.score(i['name'].lower())
-            score += self.fuzzyMatcher.score(i['class_group'].lower())
+            if i['class_group']:
+                score += self.fuzzyMatcher.score(i['class_group'].lower())
             i['rank'] = score
 
         self.window_list_merged.sort(key=lambda x: x['rank'], reverse=True)
