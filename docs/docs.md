@@ -33,6 +33,22 @@ For the actual installation procedure, check out this well-written blog post by 
 
 I'll come up with an official set of instructions soon. Till then, the above blog post should serve as an excellent reference.
 
+To make a Debian package you can cheat a bit. In the Nimbler directory, run
+
+```
+mkdir build
+mkdir build/nimbler_0.9+git
+cp -r !(\\.git|build) build/nimbler_0.9+git
+cd build/nimbler_0.9+git
+debchange "Some message" --newversion 0.9+git-1~custom
+cd ..
+tar cfJ nimbler_0.9+git-1.debian.tar.xz -C ./nimbler_0.9+git debian
+tar cfJ nimbler_0.9+git.orig.tar.xz ./nimbler_0.9+git --exclude \\.git
+cd nimbler_0.9+git
+debuild -us -uc
+
+```
+
 
 ### Distro-Specific Instructions
 
