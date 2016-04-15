@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 import gi
+gi.require_version('GdkX11', '3.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('Keybinder', '3.0')
+gi.require_version('Wnck', '3.0')
 
 from gi.repository import Gtk, GdkPixbuf, Wnck, Keybinder, Gdk, GdkX11, Pango
 import re

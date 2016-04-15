@@ -25,6 +25,8 @@ In case of Ubuntu, you can open the *Software Center* and search for `keybinder 
 
 If you're using Debian Jessie, you can similarly install libkeybinder. For Wheezy the package will have to be backported from Jessie or Ubuntu. More detailed instructions can be found below.
 
+You may also need `gir1.2-wnck-3.0`.
+
 ### Installing
 
 For the actual installation procedure, check out this well-written blog post by [Andrew](https://github.com/hotice): [http://www.webupd8.org/2013/07/fuzzy-window-switcher-for-ubuntu.html](http://www.webupd8.org/2013/07/fuzzy-window-switcher-for-ubuntu.html)
