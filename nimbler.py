@@ -311,6 +311,7 @@ class NimblerWindow(Gtk.Window):
                 button.set_relief(Gtk.ReliefStyle.NONE)
                 button.set_size_request((dpi_scaling_factor * 256), -1)
                 button.set_name(binding)
+                #button.set_sensitive(False) needs to be trigged while searching
                 button.connect('clicked', self.present_window_via_button)
                 
                 # Add the content to the button
@@ -334,6 +335,7 @@ class NimblerWindow(Gtk.Window):
         
     def enteredNameChanged(self, entry):
         text = entry.get_text()
+
         if text:
             self.windowList.rank(text)
             self.populate(self.windowList.get())
@@ -365,6 +367,19 @@ class NimblerWindow(Gtk.Window):
             self.windowList.window_list_merged[window_number]['window']
         )
 
+    def presentByShortcut(self, event, keyval):
+        # Workspace shortcuts
+        if keyval in self.function_keys_keyvals[:self.num_workspaces]:
+            self.activate_workspace(
+                self.keybindings.function_keys[self.keybindings.get_keyvals_from_name().index(keyval)]
+            )
+        # Window shortcuts
+        elif keyval in self.numbering_keyvals[:self.window_counter]:
+            if event.get_state() & Gdk.ModifierType.CONTROL_MASK:
+                self.close_window_via_number(self.numbering_keyvals.index(keyval))
+            else:
+                self.present_window_via_number(self.numbering_keyvals.index(keyval))
+
     def presentHighestRanked(self):
         highestRanked = self.windowList.getHighestRanked()
         if highestRanked is not None:
@@ -391,29 +406,23 @@ class NimblerWindow(Gtk.Window):
         #selected = self.appListView.get_selection().get_selected()
         if event.keyval == Gdk.KEY_Escape:
             self.toggle()
-        # Workspace shortcuts
-        elif event.keyval in self.function_keys_keyvals[:self.num_workspaces]:
-            self.activate_workspace(
-                self.keybindings.function_keys[self.keybindings.get_keyvals_from_name().index(event.keyval)]
-            )
-        elif not self.enteredName.has_focus():
-            # Window shortcuts
-            if event.keyval in self.numbering_keyvals[:self.window_counter]:
-                if event.get_state() & Gdk.ModifierType.CONTROL_MASK:
-                    self.close_window_via_number(self.numbering_keyvals.index(event.keyval))
-                else:
-                    self.present_window_via_number(self.numbering_keyvals.index(event.keyval))
-            elif event.keyval == Gdk.KEY_colon:
-                # Show input, thanks to http://stackoverflow.com/a/4956770
-                self.enteredName.show()
-                self.enteredName.grab_focus()
-                # Return True so the colon doesn't end up in the Entry box
-                return True
+        if not self.enteredName.has_focus() and self.presentByShortcut(event, event.keyval):
+            return
+        elif event.keyval == Gdk.KEY_colon:
+            # Show input, thanks to http://stackoverflow.com/a/4956770
+            self.enteredName.show()
+            self.enteredName.grab_focus()
+            # Return True so the colon doesn't end up in the Entry box
+            return True
         # The text input has focus
         else:
             if event.keyval == Gdk.KEY_Return:
                 # TODO do something!
-                print('enter pressed in input')
+                text = self.enteredName.get_text()
+                # You might decide just to enter the character after all
+                # Needs to be converted to keyval though
+                if len(text) is 1 and self.presentByShortcut(event, Gdk.keyval_from_name(text)):
+                    return
         
     def toggle(self):
         if self.hidden:
@@ -428,6 +437,8 @@ class NimblerWindow(Gtk.Window):
             
             # Set up the box to enter an app name
             self.enteredName = Gtk.Entry()
+            # Set up event
+            self.enteredName.connect("changed", self.enteredNameChanged)
             self.table.attach(self.enteredName, 0, self.workspaces*2, self.max_windows+1, self.max_windows+2)
             self.enteredName.set_no_show_all(True)
 
