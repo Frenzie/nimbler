@@ -1,0 +1,12 @@
+Source: nimbler
+Section: misc
+Priority: extra
+Maintainer: Frans de Jonge <fransdejonge@gmail.com>
+Build-Depends: debhelper (>= 9.0), dh-python,
+Standards-Version: 3.9.7
+Homepage: https://github.com/Frenzie/nimbler
+
+Package: nimbler
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Nimbler is a GTK-based window switcher. It can be activated with a hotkey, upon which it shows you a list of open windows ordered by workspace. You can switch quickly to the desired window using the shortcut displayed in front of the window. Workspaces can be activated using F1 through F12. The list of windows also allows clicking and navigation with the arrow keys.
