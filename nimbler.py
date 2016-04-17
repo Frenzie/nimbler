@@ -419,9 +419,12 @@ class NimblerWindow(Gtk.Window):
             if event.keyval == Gdk.KEY_Return:
                 # TODO do something!
                 text = self.enteredName.get_text()
+
                 # You might decide just to enter the character after all
                 # Needs to be converted to keyval though
-                if len(text) is 1 and self.presentByShortcut(event, Gdk.keyval_from_name(text)):
+                number = ord(text)
+                keyval = Gdk.unicode_to_keyval(number)
+                if len(text) is 1 and self.presentByShortcut(event, keyval):
                     return
         
     def toggle(self):
