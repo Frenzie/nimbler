@@ -424,7 +424,7 @@ class NimblerWindow(Gtk.Window):
                 # Needs to be converted to keyval though
                 number = ord(text)
                 keyval = Gdk.unicode_to_keyval(number)
-                if len(text) is 1 and self.presentByShortcut(event, keyval):
+                if len(text) == 1 and self.presentByShortcut(event, keyval):
                     return
         
     def toggle(self):
